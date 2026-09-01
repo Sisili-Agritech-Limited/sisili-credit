@@ -1,0 +1,786 @@
+/* ===== Sisili Credit — Stylesheet ===== */
+
+:root {
+  --cream: #F7F3EA;
+  --cream-line: #E5DCCB;
+  --line-soft: #F0EADD;
+  --ink: #12211C;
+  --forest: #0E3B2E;
+  --forest-2: #0F5C46;
+  --forest-3: #124636;
+  --forest-4: #0F4031;
+  --sage: #B7D3C6;
+  --sage-2: #8FC6AE;
+  --sage-3: #5E9B84;
+  --ochre: #E09B2D;
+  --ochre-dark: #CB8A1F;
+  --ochre-ink: #2E1F04;
+  --ochre-ink-2: #513A0E;
+  /* Text tones are tuned to clear WCAG AA (4.5:1) on both the cream page
+     background and white cards. The pre-audit values sat at 4.08 / 3.56 / 1.98,
+     so each is darkened the minimum needed while holding its hue. */
+  --rust: #B6501D;          /* was #C2551F — 4.11:1 */
+  --rust-dark: #7C2415;
+  --rust-bg: #F7E9E1;
+  --text-body: #3C4A43;     /* 8.42:1 — already fine */
+  --text-muted: #606E67;    /* was #6B7A72 — 4.08:1 */
+  --text-faint: #786E5E;    /* was #8A7F6C — 3.56:1 */
+  --text-quiet: #756E60;    /* was #B9AE99 — 1.98:1, effectively unreadable */
+  --footer-muted: #7D8882;  /* muted text on the ink footer — 4.54:1 */
+  --input-border: #DCD3C1;
+  --input-bg: #FDFCF9;
+  --dash: #DCD3C1;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Public Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: 'Archivo', sans-serif; }
+
+a { color: var(--forest-2); text-decoration: none; }
+a:hover { color: var(--rust); }
+
+button { font-family: inherit; }
+
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+
+/* ===== Nav ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247, 243, 234, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cream-line);
+}
+.site-nav .wrap {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+}
+.brand-name {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 13px;
+  border-radius: 9px;
+  color: var(--text-muted);
+}
+.nav-link:hover { background: #EDE7DA; color: var(--text-muted); }
+.nav-link.is-active { color: var(--forest); }
+.nav-apply {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  background: var(--forest);
+  color: var(--cream);
+  border: none;
+  border-radius: 11px;
+  padding: 13px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: inline-block;
+}
+.nav-apply:hover { background: var(--forest-2); color: var(--cream); }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* 44x44 minimum touch target (was 40x32). */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+/* ===== Buttons ===== */
+.btn {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 12px;
+  padding: 18px 30px;
+  cursor: pointer;
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  border: none;
+  text-align: center;
+  justify-content: center;
+}
+.btn-ochre { background: var(--ochre); color: var(--ochre-ink); }
+.btn-ochre:hover { background: var(--ochre-dark); color: var(--ochre-ink); }
+.btn-forest { background: var(--forest); color: var(--cream); }
+.btn-forest:hover { background: var(--forest-2); color: var(--cream); }
+.btn-forest-alt:hover { background: var(--ink); }
+.btn-outline-light {
+  background: transparent;
+  color: var(--cream);
+  border: 1.5px solid rgba(247, 243, 234, 0.35);
+}
+.btn-outline-light:hover { background: rgba(247, 243, 234, 0.1); color: var(--cream); }
+.btn-outline-dark {
+  background: transparent;
+  color: var(--forest);
+  border: 1.5px solid var(--forest);
+  min-height: 48px;
+  padding: 14px 24px;
+  font-size: 16px;
+}
+.btn-outline-dark:hover { background: var(--forest); color: var(--cream); }
+.btn-outline-ochre-ink {
+  background: transparent;
+  color: var(--ochre-ink);
+  border: 1.5px solid rgba(46, 31, 4, 0.35);
+}
+.btn-outline-ochre-ink:hover { background: rgba(46, 31, 4, 0.06); }
+.btn-link {
+  background: transparent;
+  color: var(--forest-2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.btn-link:hover { color: var(--rust); }
+
+/* ===== Eyebrow / section helpers ===== */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 20px;
+}
+.eyebrow.on-dark { color: var(--ochre); }
+.eyebrow.on-card { color: var(--text-faint); }
+
+.page-head { max-width: var(--max); margin: 0 auto; padding: 80px 40px 0; }
+.page-head h1 {
+  font-weight: 900;
+  font-size: 68px;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+.page-head .lede { font-size: 20px; color: var(--text-body); line-height: 1.6; max-width: 56ch; margin: 0 0 20px; }
+
+.badge-placeholder {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rust);
+  background: var(--rust-bg);
+  padding: 7px 13px;
+  border-radius: 999px;
+}
+
+.pill {
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--cream);
+  color: var(--text-body);
+  padding: 9px 15px;
+  border-radius: 999px;
+}
+.pill-bordered { border: 1px solid var(--line-soft); padding: 10px 15px; }
+
+/* ===== Cards ===== */
+.card {
+  background: #fff;
+  border: 1px solid var(--cream-line);
+  border-radius: 24px;
+}
+
+/* FAQ items are <details> so they can collapse on mobile. Above the mobile
+   breakpoint main.js force-opens them and they read as plain cards. */
+.faq-item > summary { list-style: none; }
+.faq-item > summary::-webkit-details-marker { display: none; }
+@media (min-width: 721px) {
+  .faq-item > summary { cursor: default; }
+}
+.photo-placeholder {
+  background: repeating-linear-gradient(135deg, #EDE5D6, #EDE5D6 12px, #E7DECC 12px, #E7DECC 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.photo-placeholder .label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #968973;
+  line-height: 1.7;
+}
+.avatar-placeholder {
+  background: repeating-linear-gradient(135deg, #EDE5D6, #EDE5D6 5px, #E7DECC 5px, #E7DECC 10px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.check {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== Forms ===== */
+.field-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.field {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 17px;
+  background: var(--input-bg);
+  color: var(--ink);
+}
+.field:focus { border-color: var(--forest-2); }
+
+/* ===== Focus visibility =====
+   The default UA outline is a 1px hairline that all but disappears against
+   cream, and inputs previously set `outline: none`, leaving keyboard users
+   with no focus indicator at all. */
+:where(a, button, summary, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--forest-2);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* On dark panels the forest outline disappears — switch to ochre. */
+.site-footer :where(a, button):focus-visible,
+.feature-band :where(a, button):focus-visible,
+.hero-copy :where(a, button):focus-visible {
+  outline-color: var(--ochre);
+}
+
+/* Respect users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip link — first tab stop, visually hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--forest);
+  color: var(--cream);
+  padding: 12px 20px;
+  border-radius: 0 0 10px 0;
+  font-weight: 700;
+}
+.skip-link:focus {
+  left: 0;
+  color: var(--cream);
+}
+textarea.field { resize: vertical; }
+.chip {
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--cream);
+  color: var(--text-body);
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.chip.is-selected { background: var(--forest); color: var(--cream); }
+
+/* ===== Footer ===== */
+.site-footer { background: var(--ink); margin-top: 110px; color: #9FB0A8; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid rgba(247, 243, 234, 0.12);
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 11px; font-size: 15px; }
+.footer-links a { color: #9FB0A8; }
+.footer-links a:hover { color: var(--ochre); }
+.footer-links span { color: #9FB0A8; }
+.footer-bottom {
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  /* --text-muted is tuned for the cream page; on the ink footer it only
+     reaches 3.11:1, so use the footer's own light tone. */
+  color: var(--footer-muted);
+}
+
+/* ===== Reveal-on-scroll ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ===== Responsive ===== */
+/* =========================================================================
+   MOBILE DESIGN SYSTEM
+   The page markup carries desktop padding/type as inline styles, which
+   outrank stylesheet rules — hence !important throughout these blocks.
+   This layer is a mobile-specific composition, not a scaled-down desktop:
+   grids replace stacks, cards become tiles, and long-form sections collapse.
+   ========================================================================= */
+
+/* ---------- Tablet: 721–1000px ---------- */
+@media (max-width: 1000px) {
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-6 { grid-template-columns: repeat(3, 1fr) !important; }
+  .grid-7 { grid-template-columns: repeat(3, 1fr) !important; }
+
+  /* Hero stacks: copy on solid green, photo as its own band beneath.
+     The photo carries the product (a phone showing the app), so it stays
+     unscrimmed here; the desktop left-to-right scrim would band its edge. */
+  .hero-grid { grid-template-columns: 1fr !important; min-height: auto !important; }
+  .hero-photo { min-height: 300px !important; background-position: center 28% !important; }
+  .hero-photo-veil {
+    background: linear-gradient(180deg, #0E3B2E 0%, rgba(14, 59, 46, 0.55) 18%, rgba(14, 59, 46, 0) 52%) !important;
+  }
+  .hero-copy { padding: 56px 40px 52px !important; }
+
+  .assessment-grid { grid-template-columns: 1fr !important; }
+  .assessment-arrow { display: none; }
+  .step-row { grid-template-columns: 1fr !important; }
+  .product-row { grid-template-columns: 1fr !important; }
+  .page-head h1 { font-size: 46px !important; }
+
+  /* Tablet compaction.
+     Without this the tier is the worst of both worlds: grids have already
+     halved to two columns (so text is narrow and wraps hard) while padding
+     and type are still desktop-scale — 768px measured TALLER than desktop.
+     These restore a monotonic curve without touching ≥1001px. */
+  .wrap, .page-head { padding-left: 28px; padding-right: 28px; }
+  main .wrap { padding-top: 64px !important; }
+  .card { padding: 30px !important; }
+  .feature-band { padding: 38px 30px !important; }
+  main h2 { font-size: 32px !important; }
+  main h3 { font-size: 21px !important; }
+  .page-head .lede, .lede { font-size: 18px !important; }
+  .step-row { padding: 26px !important; gap: 18px !important; }
+  .product-row > div { padding: 26px !important; }
+  .site-footer .wrap { padding: 44px 28px 30px !important; }
+  .footer-top { gap: 28px !important; }
+}
+
+/* ---------- Mobile: ≤720px ---------- */
+@media (max-width: 720px) {
+
+  /* ---- Spacing rhythm ----
+     One gutter, one section gap, one card padding. Everything derives. */
+  :root {
+    --m-gutter: 18px;
+    --m-section: 44px;
+    --m-card: 16px;
+    --m-gap: 10px;
+  }
+
+  .wrap, .page-head { padding-left: var(--m-gutter); padding-right: var(--m-gutter); }
+  .site-nav .wrap { padding: 0 var(--m-gutter); }
+  section, .section { padding-left: var(--m-gutter) !important; padding-right: var(--m-gutter) !important; }
+
+  main .wrap { padding-top: var(--m-section) !important; padding-bottom: 0 !important; }
+  .page-head { padding-top: 32px !important; padding-bottom: 0 !important; }
+
+  /* ---- Navigation ---- */
+  .nav-links { display: none; }
+  .nav-links.is-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-line);
+    padding: 10px var(--m-gutter) 18px;
+    gap: 0;
+    box-shadow: 0 12px 24px rgba(18, 33, 28, 0.08);
+  }
+  .nav-links.is-open .nav-link {
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line-soft);
+    border-radius: 0;
+    font-size: 16px;
+  }
+  .nav-links.is-open .nav-link:last-child { border-bottom: none; }
+  .nav-apply { margin-left: 0; padding: 11px 16px; font-size: 14px; }
+  .nav-toggle { display: flex; }
+
+  /* ---- Mobile type scale ----
+     Set here rather than derived from desktop: headlines that run 4-6 lines
+     on a phone read as walls, so the scale compresses faster than the canvas. */
+  h1 { font-size: 30px !important; line-height: 1.08 !important; letter-spacing: -0.035em !important; }
+  .page-head h1 { font-size: 30px !important; }
+  .hero-title { font-size: 34px !important; line-height: 1.04 !important; }
+  main h2 { font-size: 22px !important; line-height: 1.18 !important; letter-spacing: -0.03em !important; }
+  main h3 { font-size: 17px !important; line-height: 1.25 !important; }
+  .page-head .lede, .lede { font-size: 16px !important; line-height: 1.55 !important; }
+  .eyebrow { font-size: 11px !important; margin-bottom: 12px !important; }
+  .btn { font-size: 15px !important; padding: 14px 20px !important; min-height: 48px !important; }
+  .pill { font-size: 13px !important; padding: 7px 12px !important; }
+  .badge-placeholder { font-size: 11px !important; padding: 5px 10px !important; }
+
+  /* Repeating list items read at card scale, not section scale. */
+  .step-row h2, .product-row h2 { font-size: 19px !important; }
+
+  /* ---- Surfaces ---- */
+  .card { padding: var(--m-card) !important; border-radius: 16px !important; }
+  .feature-band { padding: 22px 18px !important; border-radius: 18px !important; }
+
+  /* ---- Grids ----
+     Two columns is the default for repeating tiles; full width only where
+     the content genuinely needs the measure. */
+  .grid-2 { grid-template-columns: 1fr !important; gap: var(--m-gap) !important; }
+  .grid-3, .grid-4, .grid-5, .grid-6, .grid-7 { grid-template-columns: 1fr !important; gap: var(--m-gap) !important; }
+  .m-2col { grid-template-columns: repeat(2, 1fr) !important; gap: var(--m-gap) !important; }
+  /* An odd final tile would sit alone with dead space beside it — let it run
+     the full width so the grid ends deliberately rather than half-empty. */
+  .m-2col > *:nth-child(odd):last-child { grid-column: 1 / -1; }
+  /* Full-width audience tile: the photo would be absurdly tall at 2:1 of the
+     whole row, so it becomes a letterbox strip. */
+  .m-cards > *:nth-child(odd):last-child .photo-placeholder { aspect-ratio: 21 / 9; }
+  .m-cards > *:nth-child(odd):last-child p { -webkit-line-clamp: 2; }
+
+  /* -- m-cards: audience tiles (photo + title + short line) -- */
+  .m-cards > .card { padding: 0 !important; overflow: hidden; display: flex; flex-direction: column; }
+  .m-cards .photo-placeholder {
+    height: auto !important;
+    aspect-ratio: 16 / 11;
+    padding: 0 !important;
+  }
+  .m-cards > .card > div:last-child { padding: 12px 12px 14px !important; }
+  .m-cards h3 { font-size: 16px !important; margin: 0 0 4px !important; }
+  .m-cards p {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    margin: 0 0 10px !important;
+    /* keep tiles even without truncating mid-word */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .m-cards a { font-size: 13px !important; }
+
+  /* -- m-tiles: product tiles (icon + name + the number that matters) --
+     The description is the homepage's least load-bearing text; the full
+     product detail lives on products.html. */
+  .m-tiles > .card { padding: 14px !important; }
+  .m-tiles > .card > svg { width: 22px !important; height: 22px !important; margin-bottom: 10px !important; }
+  .m-tiles > .card > h3 { font-size: 16px !important; margin: 0 0 8px !important; }
+  .m-tiles > .card > p { display: none !important; }
+  .m-tiles > .card > div:last-child {
+    margin-top: auto !important;
+    padding-top: 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+  .m-tiles > .card > div:last-child strong { display: block; font-size: 13px; }
+
+  /* -- m-compact: promise/principle items (rule + title + line) -- */
+  .m-compact > div { padding-top: 12px !important; border-top-width: 2px !important; }
+  .m-compact > div > div:first-child { font-size: 14px !important; margin-bottom: 5px !important; line-height: 1.25 !important; }
+  .m-compact > div > div:last-child {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* -- m-stories: testimonials are the one place a swipe genuinely fits --
+     a quote is a single unit you read then move past, not a set you compare. */
+  .m-stories {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--m-gap) !important;
+    margin: 0 calc(var(--m-gutter) * -1) !important;
+    padding: 2px var(--m-gutter) 8px !important;
+    scroll-padding-left: var(--m-gutter);
+    scrollbar-width: none;
+  }
+  .m-stories::-webkit-scrollbar { display: none; }
+  .m-stories > * { flex: 0 0 80%; min-width: 0; scroll-snap-align: start; }
+  .m-stories .card > div:nth-child(2) { font-size: 15px !important; line-height: 1.4 !important; margin-bottom: 14px !important; }
+
+  /* ---- Hero ---- */
+  .hero-copy { padding: 30px var(--m-gutter) 32px !important; }
+  .hero-copy > div:first-child { margin-bottom: 16px !important; padding: 7px 12px !important; }
+  .hero-copy > div:first-child span:last-child { font-size: 11.5px !important; }
+  .hero-copy p { font-size: 16px !important; line-height: 1.5 !important; margin-bottom: 20px !important; }
+  .hero-copy .btn { width: 100%; }
+  .hero-copy > div:nth-of-type(2) { gap: 8px !important; margin-bottom: 18px !important; }
+  /* Trust line: three claims as one compact row rather than three tall lines. */
+  .hero-copy > div:last-child {
+    gap: 6px 14px !important;
+    font-size: 12px !important;
+  }
+  .hero-photo { min-height: 240px !important; }
+
+  /* ---- Assessment flow: the tallest section on the homepage ---- */
+  .assessment-grid { gap: var(--m-gap) !important; }
+  .assessment-grid > div { padding: 16px !important; border-radius: 16px !important; }
+  .assessment-grid .pill { font-size: 12px !important; padding: 6px 10px !important; }
+  .assessment-grid > div > div:first-child { margin-bottom: 4px !important; }
+  .assessment-grid > div > div:nth-child(2) { font-size: 17px !important; margin-bottom: 10px !important; }
+  /* The two outcomes are short, parallel statements — read them side by side
+     rather than as two more full-width blocks in the stack. */
+  .assessment-grid > div:last-child {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--m-gap) !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+  .assessment-grid > div:last-child > .card { padding: 14px !important; }
+  .assessment-grid > div:last-child span[style*="font-size:20px"] { font-size: 15px !important; }
+  .assessment-grid > div:last-child > .card > div:last-child { font-size: 12.5px !important; line-height: 1.45 !important; }
+  .assessment-grid > div:last-child > .card > div:first-child { margin-bottom: 6px !important; gap: 7px !important; }
+
+  /* ---- Group-credit benefit tiles: 2-up instead of four stacked blocks ---- */
+  .m-benefits {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--m-gap) !important;
+  }
+  .m-benefits > div { padding: 12px 13px !important; border-radius: 12px !important; }
+  .m-benefits > div > div:first-child { font-size: 13.5px !important; margin-bottom: 4px !important; line-height: 1.25 !important; }
+  .m-benefits > div > div:last-child {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ---- Group journey tiles (groups.html) ---- */
+  .grid-7.m-2col > .card { padding: 12px 13px !important; }
+  .grid-7.m-2col > .card span:last-child { font-size: 14px !important; }
+
+  /* ---- Feature bands (group credit, CTA) ---- */
+  .feature-band h2 { font-size: 22px !important; }
+  .feature-band p { font-size: 15px !important; line-height: 1.5 !important; }
+  .feature-band .btn { width: 100%; }
+
+  /* ---- Step rows (how-it-works) ---- */
+  .step-row { padding: 16px !important; gap: 10px !important; }
+  .step-row > div:first-child { font-size: 28px !important; }
+  .step-row p { font-size: 14px !important; line-height: 1.5 !important; }
+  .step-row > div:last-child { padding: 12px 14px !important; border-radius: 12px !important; }
+  .step-row > div:last-child div:last-child { font-size: 13px !important; }
+
+  /* ---- Product rows (products.html) ---- */
+  .product-row > div { padding: 16px !important; }
+  .product-row p { font-size: 14px !important; line-height: 1.5 !important; }
+  /* Spec panel: four stacked label/value pairs become a 2x2 grid. */
+  .product-row > div:last-child {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px !important;
+  }
+  .product-row > div:last-child > div > div:first-child { font-size: 11px !important; margin-bottom: 2px !important; }
+  .product-row > div:last-child > div > div:last-child { font-size: 15px !important; line-height: 1.25 !important; }
+
+  /* ---- FAQ accordion ---- */
+  .faq-item { padding: 0 !important; }
+  .faq-item > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 15px 42px 15px 16px;
+    position: relative;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 15.5px;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin-bottom: 0 !important;
+  }
+  .faq-item > summary::-webkit-details-marker { display: none; }
+  .faq-item > summary::after {
+    content: '';
+    position: absolute;
+    right: 18px; top: 50%;
+    width: 8px; height: 8px;
+    margin-top: -5px;
+    border-right: 2px solid var(--text-faint);
+    border-bottom: 2px solid var(--text-faint);
+    transform: rotate(45deg);
+    transition: transform 180ms ease;
+  }
+  .faq-item[open] > summary::after { transform: rotate(-135deg); margin-top: -2px; }
+  .faq-item > .faq-answer { padding: 0 16px 16px; font-size: 14px !important; line-height: 1.55 !important; }
+
+  /* ---- Footer: collapsible groups + direct actions ---- */
+  .site-footer { margin-top: var(--m-section) !important; }
+  .site-footer .wrap { padding: 32px var(--m-gutter) 24px !important; }
+  .footer-top {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding-bottom: 8px !important;
+  }
+  .footer-brand img { height: 28px !important; }
+  .footer-top > div:first-child p { font-size: 13.5px !important; line-height: 1.5 !important; }
+  .footer-top > div:first-child p:last-of-type { font-size: 11.5px !important; }
+
+  .footer-actions { display: flex; gap: 8px; margin: 16px 0 20px; }
+  .footer-action {
+    flex: 1;
+    text-align: center;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1.5px solid rgba(247, 243, 234, 0.28);
+    color: var(--cream);
+    min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-action--wa { background: var(--ochre); border-color: var(--ochre); color: var(--ochre-ink); }
+
+  .footer-group { border-top: 1px solid rgba(247, 243, 234, 0.12); }
+  .footer-group > summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding: 15px 30px 15px 0;
+    margin-bottom: 0 !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .footer-group > summary::-webkit-details-marker { display: none; }
+  .footer-group > summary::after {
+    content: '';
+    position: absolute;
+    right: 4px; top: 50%;
+    width: 8px; height: 8px; margin-top: -6px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    opacity: .65;
+    transition: transform 180ms ease;
+  }
+  .footer-group[open] > summary::after { transform: rotate(-135deg); margin-top: -2px; }
+  .footer-group .footer-links { padding: 0 0 14px; gap: 12px !important; }
+  .footer-group .footer-links > * { min-height: 24px; }
+
+  .footer-bottom {
+    padding-top: 18px !important;
+    font-size: 12px !important;
+    gap: 6px !important;
+    flex-direction: column;
+  }
+}
+
+/* ---------- Small phones: ≤430px (covers 375 / 390 / 414) ---------- */
+@media (max-width: 430px) {
+  :root { --m-gutter: 16px; --m-gap: 9px; --m-card: 14px; }
+  h1, .page-head h1 { font-size: 27px !important; }
+  .hero-title { font-size: 31px !important; }
+  main h2 { font-size: 20px !important; }
+  .m-cards h3 { font-size: 15px !important; }
+  .m-tiles > .card > h3 { font-size: 15px !important; }
+  .m-stories > * { flex: 0 0 85%; }
+}
+
+/* ---------- Desktop guards ----------
+   The footer columns and FAQ are <details> so mobile can collapse them;
+   above the mobile breakpoint they must read as plain columns/cards. */
+@media (min-width: 721px) {
+  .faq-item > summary { cursor: default; }
+  .footer-group > summary { cursor: default; list-style: none; }
+  .footer-group > summary::-webkit-details-marker { display: none; }
+  .footer-actions { display: none; }
+}

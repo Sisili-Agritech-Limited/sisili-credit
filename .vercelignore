@@ -1,0 +1,7 @@
+# Full-resolution source images. The site serves the optimised derivatives
+# (Hero.jpg, farmer.jpg, trader.jpg, logo-*.png) — these originals are kept in
+# the repo for future re-crops but are ~27MB and should not ship.
+assets/img/Logo.png
+assets/img/Hero.png
+assets/img/farmer.png
+assets/img/trader.png
