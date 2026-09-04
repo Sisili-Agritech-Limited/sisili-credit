@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — Sisili Credit</title>
 <meta name="description" content="A person answers. Weekdays 8am–6pm, Saturdays 9am–1pm. WhatsApp is fastest.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sisili Credit">
+<meta property="og:url" content="https://sisilicredit.co.ke/contact.html">
+<meta property="og:title" content="Contact — Sisili Credit">
+<meta property="og:description" content="A person answers. Weekdays 8am–6pm, Saturdays 9am–1pm. WhatsApp is fastest.">
+<meta property="og:image" content="https://sisilicredit.co.ke/assets/img/Hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Sisili Credit">
+<meta name="twitter:description" content="A person answers. Weekdays 8am–6pm, Saturdays 9am–1pm. WhatsApp is fastest.">
+<meta name="twitter:image" content="https://sisilicredit.co.ke/assets/img/Hero.jpg">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,28 +72,12 @@
                 <span style="display:block;"><a href="mailto:info@sisilicredit.co.ke" style="color:inherit;">info@sisilicredit.co.ke</a></span>
               </span>
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:20px; border-bottom:1px solid #F0EADD; padding-bottom:20px;">
-              <span style="font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#786E5E;">Office</span>
-              <span style="font-size:17px; font-weight:600; text-align:right;">
-                <span style="display:block;">[Street address]</span>
-                <span style="display:block;">Nairobi, Kenya</span>
-              </span>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:20px; border-bottom:1px solid #F0EADD; padding-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:20px;">
               <span style="font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#786E5E;">Support hours</span>
               <span style="font-size:17px; font-weight:600; text-align:right;">
                 <span style="display:block;">Mon–Fri 8:00–18:00</span>
                 <span style="display:block;">Sat 9:00–13:00</span>
               </span>
-            </div>
-            <div>
-              <div style="font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#786E5E; margin-bottom:14px;">Social</div>
-              <div style="display:flex; gap:10px;">
-                <span style="width:46px; height:46px; border-radius:12px; background:#F7F3EA; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#786E5E;">FB</span>
-                <span style="width:46px; height:46px; border-radius:12px; background:#F7F3EA; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#786E5E;">IG</span>
-                <span style="width:46px; height:46px; border-radius:12px; background:#F7F3EA; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#786E5E;">X</span>
-                <span style="width:46px; height:46px; border-radius:12px; background:#F7F3EA; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#786E5E;">LI</span>
-              </div>
             </div>
           </div>
         </div>
@@ -91,7 +85,14 @@
       <div class="card" style="padding:44px 46px;">
         <h2 style="font-weight:800; font-size:28px; letter-spacing:-0.03em; margin:0 0 8px;">Send us a message</h2>
         <p style="font-size:16px; color:#606E67; margin:0 0 30px; line-height:1.55;">Four fields. We reply within one working day.</p>
-        <form data-contact-form style="display:flex; flex-direction:column; gap:18px;" novalidate>
+        <!-- TODO(launch blocker): replace YOUR_FORM_ID with the real Formspree
+             endpoint (create a free form at https://formspree.io, then swap
+             the ID below) before driving traffic here. Until then, submissions
+             will fail with a Formspree 404 and the JS will show the WhatsApp
+             fallback message in main.js. -->
+        <form data-contact-form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex; flex-direction:column; gap:18px;" novalidate>
+          <input type="hidden" name="_subject" value="New enquiry from sisilicredit.co.ke">
+          <input type="hidden" name="i_am" data-iam-value value="A farmer">
           <div>
             <label class="field-label" for="name">Your name</label>
             <input class="field" type="text" id="name" name="name" placeholder="Full name" required />
@@ -156,10 +157,10 @@
       <details class="footer-group">
         <summary class="footer-col-title">Legal</summary>
         <div class="footer-links">
-          <span>Terms of service</span>
-          <span>Privacy policy</span>
-          <span>Data protection</span>
-          <span>Complaints</span>
+          <span class="is-disabled" aria-disabled="true" title="Coming soon">Terms of service</span>
+          <span class="is-disabled" aria-disabled="true" title="Coming soon">Privacy policy</span>
+          <span class="is-disabled" aria-disabled="true" title="Coming soon">Data protection</span>
+          <span class="is-disabled" aria-disabled="true" title="Coming soon">Complaints</span>
         </div>
       </details>
     </div>

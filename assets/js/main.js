@@ -60,18 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
     desktop.addEventListener('change', sync);
   }
 
-  // "I am" chip selector on the contact page
+  // "I am" chip selector on the contact page — mirrors the selection into a
+  // hidden input so it's actually included in the form submission.
   const chipGroup = document.querySelector('[data-chip-group]');
+  const iamValue = document.querySelector('[data-iam-value]');
   if (chipGroup) {
     chipGroup.querySelectorAll('.chip').forEach((chip) => {
       chip.addEventListener('click', () => {
         chipGroup.querySelectorAll('.chip').forEach((c) => c.classList.remove('is-selected'));
         chip.classList.add('is-selected');
+        if (iamValue) iamValue.value = chip.textContent.trim();
       });
     });
   }
 
-  // Contact form (front-end only placeholder — not yet wired to a backend)
+  // Contact form — submits to Formspree (see the form's `action` in
+  // contact.html; swap in the real form ID before launch). Falls back to a
+  // WhatsApp/phone prompt if the request fails, so a submission never just
+  // silently vanishes.
   const contactForm = document.querySelector('[data-contact-form]');
   const formStatus = document.querySelector('[data-form-status]');
   if (contactForm) {
@@ -81,13 +87,41 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.reportValidity();
         return;
       }
-      if (formStatus) {
-        formStatus.textContent = 'Thank you — this form is not yet connected to a backend, so your message was not actually sent. Please reach us on WhatsApp or by phone in the meantime.';
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const resetChips = () => {
+        if (chipGroup) {
+          chipGroup.querySelectorAll('.chip').forEach((c, i) => c.classList.toggle('is-selected', i === 0));
+        }
+        if (iamValue) iamValue.value = 'A farmer';
+      };
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
       }
-      contactForm.reset();
-      if (chipGroup) {
-        chipGroup.querySelectorAll('.chip').forEach((c, i) => c.classList.toggle('is-selected', i === 0));
-      }
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' },
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error('Form submission failed');
+          if (formStatus) {
+            formStatus.textContent = 'Thank you — your message has been sent. We reply within one working day.';
+          }
+          contactForm.reset();
+          resetChips();
+        })
+        .catch(() => {
+          if (formStatus) {
+            formStatus.textContent = 'Sorry — that message could not be sent. Please reach us on WhatsApp or by phone instead; nothing here was lost, just not delivered.';
+          }
+        })
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send message';
+          }
+        });
     });
   }
 });

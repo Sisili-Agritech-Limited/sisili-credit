@@ -404,6 +404,12 @@ textarea.field { resize: vertical; }
 .footer-links a { color: #9FB0A8; }
 .footer-links a:hover { color: var(--ochre); }
 .footer-links span { color: #9FB0A8; }
+/* Legal documents that don't exist yet (Terms, Privacy, etc.) — visibly
+   inert rather than styled like the real links beside them. */
+.footer-links span.is-disabled {
+  color: rgba(159, 176, 168, 0.45);
+  cursor: not-allowed;
+}
 .footer-bottom {
   padding-top: 26px;
   display: flex;
