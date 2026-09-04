@@ -74,10 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact form — submits to Formspree (see the form's `action` in
-  // contact.html; swap in the real form ID before launch). Falls back to a
-  // WhatsApp/phone prompt if the request fails, so a submission never just
-  // silently vanishes.
+  // Contact form — submits to Web3Forms (see the form's `action` and
+  // `access_key` in contact.html). Falls back to a WhatsApp/phone prompt if
+  // the request fails, so a submission never just silently vanishes.
   const contactForm = document.querySelector('[data-contact-form]');
   const formStatus = document.querySelector('[data-form-status]');
   if (contactForm) {

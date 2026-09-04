@@ -85,13 +85,9 @@
       <div class="card" style="padding:44px 46px;">
         <h2 style="font-weight:800; font-size:28px; letter-spacing:-0.03em; margin:0 0 8px;">Send us a message</h2>
         <p style="font-size:16px; color:#606E67; margin:0 0 30px; line-height:1.55;">Four fields. We reply within one working day.</p>
-        <!-- TODO(launch blocker): replace YOUR_FORM_ID with the real Formspree
-             endpoint (create a free form at https://formspree.io, then swap
-             the ID below) before driving traffic here. Until then, submissions
-             will fail with a Formspree 404 and the JS will show the WhatsApp
-             fallback message in main.js. -->
-        <form data-contact-form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex; flex-direction:column; gap:18px;" novalidate>
-          <input type="hidden" name="_subject" value="New enquiry from sisilicredit.co.ke">
+        <form data-contact-form action="https://api.web3forms.com/submit" method="POST" style="display:flex; flex-direction:column; gap:18px;" novalidate>
+          <input type="hidden" name="access_key" value="89141a8e-826b-4e10-939d-4e1062576f06">
+          <input type="hidden" name="subject" value="New enquiry from sisilicredit.co.ke">
           <input type="hidden" name="i_am" data-iam-value value="A farmer">
           <div>
             <label class="field-label" for="name">Your name</label>
