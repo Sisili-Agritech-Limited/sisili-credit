@@ -266,15 +266,50 @@ img { max-width: 100%; display: block; }
   color: #968973;
   line-height: 1.7;
 }
-.avatar-placeholder {
-  background: repeating-linear-gradient(135deg, #EDE5D6, #EDE5D6 5px, #E7DECC 5px, #E7DECC 10px);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
 .check {
   flex-shrink: 0;
   margin-top: 2px;
 }
+
+/* ===== Flow diagram =====
+   A connected-node vertical timeline, used in place of the site's default
+   "row of cards" for the couple of sections deliberately broken out of that
+   template (index.html "assessment approach", about.html "How we work"). */
+.flow-diagram { position: relative; }
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 26px;
+  padding-bottom: 40px;
+}
+.flow-step:last-child { padding-bottom: 0; }
+.flow-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 52px;
+  bottom: -40px;
+  width: 2px;
+  background: var(--cream-line);
+}
+.flow-marker {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--cream);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.flow-content { padding-top: 8px; }
 
 /* ===== Forms ===== */
 .field-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
@@ -423,8 +458,6 @@ textarea.field { resize: vertical; }
   }
   .hero-copy { padding: 56px 40px 52px !important; }
 
-  .assessment-grid { grid-template-columns: 1fr !important; }
-  .assessment-arrow { display: none; }
   .step-row { grid-template-columns: 1fr !important; }
   .product-row { grid-template-columns: 1fr !important; }
   .page-head h1 { font-size: 46px !important; }
@@ -574,24 +607,6 @@ textarea.field { resize: vertical; }
     overflow: hidden;
   }
 
-  /* -- m-stories: testimonials are the one place a swipe genuinely fits --
-     a quote is a single unit you read then move past, not a set you compare. */
-  .m-stories {
-    display: flex !important;
-    grid-template-columns: none !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: var(--m-gap) !important;
-    margin: 0 calc(var(--m-gutter) * -1) !important;
-    padding: 2px var(--m-gutter) 8px !important;
-    scroll-padding-left: var(--m-gutter);
-    scrollbar-width: none;
-  }
-  .m-stories::-webkit-scrollbar { display: none; }
-  .m-stories > * { flex: 0 0 80%; min-width: 0; scroll-snap-align: start; }
-  .m-stories .card > div:nth-child(2) { font-size: 15px !important; line-height: 1.4 !important; margin-bottom: 14px !important; }
-
   /* ---- Hero ---- */
   .hero-copy { padding: 30px var(--m-gutter) 32px !important; }
   .hero-copy > div:first-child { margin-bottom: 16px !important; padding: 7px 12px !important; }
@@ -606,26 +621,12 @@ textarea.field { resize: vertical; }
   }
   .hero-photo { min-height: 240px !important; }
 
-  /* ---- Assessment flow: the tallest section on the homepage ---- */
-  .assessment-grid { gap: var(--m-gap) !important; }
-  .assessment-grid > div { padding: 16px !important; border-radius: 16px !important; }
-  .assessment-grid .pill { font-size: 12px !important; padding: 6px 10px !important; }
-  .assessment-grid > div > div:first-child { margin-bottom: 4px !important; }
-  .assessment-grid > div > div:nth-child(2) { font-size: 17px !important; margin-bottom: 10px !important; }
-  /* The two outcomes are short, parallel statements — read them side by side
-     rather than as two more full-width blocks in the stack. */
-  .assessment-grid > div:last-child {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--m-gap) !important;
-    padding: 0 !important;
-    background: none !important;
-    border: none !important;
-  }
-  .assessment-grid > div:last-child > .card { padding: 14px !important; }
-  .assessment-grid > div:last-child span[style*="font-size:20px"] { font-size: 15px !important; }
-  .assessment-grid > div:last-child > .card > div:last-child { font-size: 12.5px !important; line-height: 1.45 !important; }
-  .assessment-grid > div:last-child > .card > div:first-child { margin-bottom: 6px !important; gap: 7px !important; }
+  /* ---- Flow diagram: tighten the connected-node timeline for phones ---- */
+  .flow-step { grid-template-columns: 40px 1fr; gap: 16px; padding-bottom: 28px; }
+  .flow-step:not(:last-child)::before { left: 19px; top: 40px; bottom: -28px; }
+  .flow-marker { width: 40px; height: 40px; font-size: 15px; }
+  .flow-content { padding-top: 3px; }
+  .flow-outcomes { grid-template-columns: 1fr !important; gap: 10px !important; }
 
   /* ---- Group-credit benefit tiles: 2-up instead of four stacked blocks ---- */
   .m-benefits {
@@ -671,6 +672,9 @@ textarea.field { resize: vertical; }
   }
   .product-row > div:last-child > div > div:first-child { font-size: 11px !important; margin-bottom: 2px !important; }
   .product-row > div:last-child > div > div:last-child { font-size: 15px !important; line-height: 1.25 !important; }
+  /* Illustrative example note: a fifth item, so it spans both columns
+     rather than sitting alone beside a dead cell. */
+  .product-row > div:last-child > .product-example { grid-column: 1 / -1; padding-top: 12px !important; font-size: 12.5px !important; }
 
   /* ---- FAQ accordion ---- */
   .faq-item { padding: 0 !important; }
@@ -772,7 +776,6 @@ textarea.field { resize: vertical; }
   main h2 { font-size: 20px !important; }
   .m-cards h3 { font-size: 15px !important; }
   .m-tiles > .card > h3 { font-size: 15px !important; }
-  .m-stories > * { flex: 0 0 85%; }
 }
 
 /* ---------- Desktop guards ----------
